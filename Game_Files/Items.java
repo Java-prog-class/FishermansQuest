@@ -30,7 +30,7 @@ public class Items{
 	//Inside Armour
 	//	-Helmet
 	//	-ChainMail
-	//  -ChestPlate
+	//  	-ChestPlate
 	//	-PlateLegs
 	//	-Shield
 	//	(Anti-Fire Shield?)
