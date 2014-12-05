@@ -20,7 +20,7 @@ public class Items{
 	//	-Bread
 	//	-Hot Peppers
 	
-	//Inside Weapons
+	//Inside Weapons(Mostly Found Inside The Crypt)
 	//	-Kitchen Knife
 	//	-Harpoon Gun
 	//	-Damascus Sword
