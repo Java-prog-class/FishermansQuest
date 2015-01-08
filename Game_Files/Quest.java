@@ -60,11 +60,11 @@ public class Main {
 	boolean parseCommand(String text) {
 		
 			
-		text = text.toUpperCase().trim();
+		text = text.toLowerCase().trim();
 		
 		//split text into words
 		String words[] = text.split(" ");
-		String word1 = words[0];
+		String word1 = words[0].toUpperCase();  //first word is upper case
 		String word2 = "";
 		int numWords = words.length;
 		if (numWords > 1) word2 = words[1];
@@ -103,7 +103,12 @@ public class Main {
 			System.out.println("You are in the "+ currentRoom.getTitle() + ". " + currentRoom.getLongDesc());
 			listItemsinRoom();
 			break;
+		case "OPEN":
+			//if door then open door
 			
+			//if container, then open container
+			openContainer(capitalizeFirstLetter(word2));
+			break;
 		default: 
 			System.out.println("Sorry, I don't understand that command");
 		}
@@ -130,6 +135,57 @@ public class Main {
 		for (String s : currentRoom.roomItems) {
 			System.out.print(s + ", ");
 		}
+	}
+	
+	void openContainer(String cname) {		
+	
+		/*1. is the container in the room
+		  2. is the cname a container?
+		    	yes: continue on
+		    	no: "you can't open that". Return
+		  3. does it require a key? 
+		  				no: open the container
+						yes: do you have the key?
+								yes: open the container
+								no: print "You need the cabinet key". return.
+		  4. list what is inside the container
+		*/
+		
+		if (! currentRoom.roomItems.contains(cname)) {			
+			System.out.println("There is no " + cname + " here.");
+			return;
+		}
+		
+		//find the item/container in the list of items and store it in the variable "item"
+		Items possibleContainer = new Items();
+		for(Items z : itemList) {
+			if (z.name.equals(cname)) {
+				possibleContainer = z;
+				break;
+			}
+		}
+		//is the item NOT a container?
+		if (!(possibleContainer instanceof Containers)) {
+			System.out.println("You can't open that!");
+			return;
+		}
+		Containers container = (Containers)possibleContainer; 
+		//
+		if (container.requiresKey == "" ) {
+			container.isOpen = true;
+			System.out.println("You open the " + cname);
+		} else {
+			//see if the key is in the inventory
+			//...
+			System.out.println("You need the " + container.requiresKey);
+		}
+		//here list everything in the cabinet.
+	}
+	
+	String capitalizeFirstLetter(String original){
+	    if(original.length() == 0)
+	        return original;
+	    return original.substring(0, 1).toUpperCase() + original.substring(1);
 	}
 	/*String[] inventory = new String[20];
 	ArrayList <String> inventory = new ArrayList<String>();*/
@@ -162,10 +218,10 @@ public class Main {
 	    itemList.add(z);
 	    z = new Items("Plate Leggings", 0, 0, 40, true);
 	    itemList.add(z);
-	    z = new Items("Shield", 0, 0, 100, true);
+	    z = new Items("shield", 0, 0, 100, true);
 	    itemList.add(z);
 	    //Keys
-	    z = new Items("Cabnet Key", 0, 0, 0, true);
+	    z = new Items("Cabinet Key", 0, 0, 0, true);	    
 	    itemList.add(z);
 	    z = new Items("Tower Key", 0, 0, 0, true);
 	    itemList.add(z);
@@ -174,13 +230,28 @@ public class Main {
 	    //Misc
 	    z = new Items("Gas Lantern", 0, 0, 0, true);
 	    itemList.add(z);
-	    z = new Items("Rope", 0, 0, 0, true);
-	    itemList.add(z);
 	    z = new Items("Boat Part 1", 0, 0, 0, true);
 	    itemList.add(z);
 	    z = new Items("Boat Part 2", 0, 0, 0, true);
 	    itemList.add(z);
 	    z = new Items("Boat Part 3", 0, 0, 0, true);
+	    itemList.add(z);
+	    //(activated by keys)
+	    //z = new Items("Cabinet", 0, 0, 0, false);
+	    //z.isContainer = true;
+	    Containers c = new Containers("Cabinet");
+	    c.items.add("Long Sword");
+	    c.items.add("Gas Lantern");
+	    c.requiresKey = "Cabinet Key";
+	    itemList.add(c);
+	    
+	    c = new Containers("Chest");
+	    c.items.add("Damascus Sword");  
+	    c.requiresKey = "Chest Key";
+	    itemList.add(c);
+	    itemList.add(z);
+	    
+	    z = new Items("Tower", 0, 0, 0, false); //this should be a room. Need to figure out how doors work.
 	    itemList.add(z);
 	       
 		for (Items item : itemList){
