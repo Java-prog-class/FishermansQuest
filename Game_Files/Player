@@ -1,0 +1,22 @@
+Enter file contents herepublic class Player {
+	int health = 100;
+	int currentHealth = health;
+	int armourRating = 0;
+	int damage = 10;
+	int xp = 0;
+	int gold = 0;
+	
+Player(int health, int currentHealth, int armourRating, int damage, int xp, int gold){
+		this.health = health;
+		this.currentHealth = currentHealth;
+		this.armourRating = armourRating;
+		this.damage = damage;
+		this.xp = xp;
+		this.gold = gold;
+	}
+	public String toString(){
+		String s = String.format("Health :%d \nArmour :%d \nDamage :%d \nXP :%d Gold :%d", health, armourRating, damage, xp, gold);
+		return s;
+	}
+}
+
