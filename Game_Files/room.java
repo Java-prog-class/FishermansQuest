@@ -53,7 +53,7 @@ public class Room{
 		Room r = new Room(1, "--Beach--\n\n", "\nThick forest filled with tall trees. You cannot go around.");//Sandwich, banana, Kitchen Knife, Chest Key
 		//		   N E S W U D
 		r.setExits(2,0,0,0,0,0);
-		r.long_desc = "The wind blows and the waves crash against your\n wrecked boat. It still needs parts. The crate that you stored your stuff is broken. Inside is a...";
+		r.long_desc = "The wind blows and the waves crash against your\nwrecked boat. It still needs parts. The crate that you stored your stuff is broken.";
 		r.roomItems.add("Sandwich");	
 		r.roomItems.add("Banana");
 		r.roomItems.add("Kitchen Knife");
@@ -62,17 +62,13 @@ public class Room{
 		
 		r = new Room(2, "--Front of House--\n\n", "\nIt's old, looks abandoned, boarded up windows.");
 		r.setExits(3,0,1,0,0,0); 
-		r.long_desc = "Old white house, paint looks chipped. There is no way around. Shattered windows with boards nailed to them, trees hug the\n sides of the house. Bird bath to the left of you.";
+		r.long_desc = "Old white house, paint looks chipped. There is no way around. Shattered windows \nwith boards nailed to them, trees hug the\nsides of the house. Bird bath to the left of you. You cannot\ngo around!";
 		roomList.add(r);
 		
-		r = new Room(3, "--Living Room--\n\n", "\nYou walk in. Candles are lit around the room.");//Cabnet(needs key): Long Sword, Rope, Gas Lantern
+		r = new Room(3, "--Living Room--\n\n", "\nYou walk in. Candles are lit\naround the room. Old cabinet, mess all over the room.");//Cabnet(needs key): Long Sword, Rope, Gas Lantern
 		r.setExits(0,4,2,5,0,0); 
 		r.long_desc = " ";
 		r.roomItems.add("Cabinet");
-		//figure out how to put things into a container
-		//r.roomItems.add("Long Sword");
-		//r.roomItems.add("Rope");
-		//r.roomItems.add("Gas Lantern");
 		roomList.add(r);
 		
 		r = new Room(4, "--Bedroom--\n\n", "\nDoor swings open. Half unpacked boxes are scattered all over the room.");//Boat Part 1, Cabnet key
@@ -105,7 +101,7 @@ public class Room{
 		r.roomItems.add("Iron Helmet");
 		r.roomItems.add("Chest Plate");
 		r.roomItems.add("Plate Leggings");
-		r.roomItems.add("shield");
+		r.roomItems.add("Shield");
 		roomList.add(r);
 		
 		r = new Room(10, "--Laboratory--\n\n", "\nA table with stuff on a table. Smashed beakers on the floor.");// Health Potion, Damage Rage Potion
