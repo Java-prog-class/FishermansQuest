@@ -4,11 +4,11 @@ import java.util.*;
 public class Main {
 
 	//global (instance) variables
-	ArrayList<Room> roomList = new ArrayList<Room>();
+	ArrayList<Rooms> roomList = new ArrayList<Rooms>();
 	ArrayList<Items> itemList = new ArrayList<Items>();
 
 	int currRoomID = 1;
-	Room currentRoom = new Room(0,"","");
+	Rooms currentRoom = new Rooms(0,"","");
 	
 	public static void main(String[]args){
 		new Main();
@@ -18,7 +18,7 @@ public class Main {
 
 		boolean playing = true;
 		String command = " ";
-		Room.setupRooms(roomList);
+		Rooms.setupRooms(roomList);
 		makeItems();
 		updateCurrentRoom(currRoomID);
 
@@ -35,7 +35,7 @@ public class Main {
 
 	void updateCurrentRoom(int n) {
 		//check each room for current room id
-		for (Room r : roomList){
+		for (Rooms r : roomList){
 			if (r.getRoomID() == n) {
 				currentRoom = r; //set currentRoom to this room
 				break;
@@ -51,11 +51,6 @@ public class Main {
 		return text;
 	}
 
-	/* Commands that work so far:
-	GO direction, direction,
-	LOOK, QUIT
-	?, HELP  <--- not working yet
-	 */
 	boolean parseCommand(String text) {
 
 		/* What this section does:
@@ -83,7 +78,6 @@ public class Main {
 		switch(word1) {
 		case "Quit":
 			System.out.print("Do you really want to quit the game?");
-			//get answer
 			return false;
 
 		case "N":
@@ -126,6 +120,8 @@ public class Main {
 			//	System.out.println(player.toString());
 			//}
 			break;
+			
+		case "I":
 		case "Inventory":
 			for (Items item : itemList){
 				if (item.inInventory){
@@ -134,6 +130,7 @@ public class Main {
 			}
 			break;
 		case "Open":
+		case "Use":
 			//opens container
 			openContainer(word2);
 			break;
@@ -146,12 +143,12 @@ public class Main {
 	void move(char dir) {
 		int newRoom = currentRoom.getExit(dir);
 		if (newRoom == 0) {
-			System.out.println("You can't go that way");
+			System.out.println("You can't go that way!");
 			return;
 		}
 		currRoomID = newRoom;
 		updateCurrentRoom(currRoomID);
-		System.out.println("You walk to the "+ currentRoom.getTitle() + ". " + currentRoom.getDesc());
+		System.out.println("You are now at "+ currentRoom.getTitle() + ". " + currentRoom.getDesc());
 		listItemsinRoom();
 		//start combat here if there is a monster in the room???
 		//new Combat(player);
@@ -237,19 +234,19 @@ public class Main {
 		}
 		Containers container = (Containers)possibleContainer; 
 
-		if (container.requiresKey == " " ) {
+		if (container.requiresKey == "" ) {
 			container.isOpen = true;
-			System.out.println("You open the " + cname);
+			System.out.println("You can see what's inside the " + cname + "!");
 		} else {
 			//see if the key is in the inventory
 			for (Items item : itemList){
 				if (item.name.equals(container.requiresKey) && item.inInventory){
-					System.out.println("UNLOCK!!!");
+					System.out.println("You have successfully opened the " + cname);
 					System.out.println(container.items.toString());
 					return;
 				}
 			}
-			System.out.println("You need the " + container.requiresKey);
+			System.out.println("You need the " + container.requiresKey + " to open this.");
 		}
 		
 	}
@@ -263,7 +260,7 @@ public class Main {
 	String minusOneWord(String[] w) {
 		String s = "";
 		for (int i=1; i<w.length; i++) {
-			s = s + w[i] + " ";
+			s = s + w[i] + "";
 		}
 		return s.trim();
 	}
@@ -271,12 +268,12 @@ public class Main {
 	String minusTwoWords(String[] w) {
 		String s = "";
 		for (int i=2; i<w.length; i++) {
-			s = s + w[i] + " ";
+			s = s + w[i] + "";
 		}
 		return s.trim();
 	}
 	
-	//Items(String name, int h, int am, int dm, boolean carry, boolean mine) {
+	//Items(String name, int h, int am, int dm, boolean carry, boolean mine(is it in your inventory?)) {
 	void makeItems() {
 		//food
 		Items z = new Items("Sandwich", 15, 0,0,true, false);		
@@ -309,30 +306,52 @@ public class Main {
 		//Keys
 		z = new Items("Cabinet Key", 0, 0, 0, true, false);	    
 		itemList.add(z);
-		z = new Items("Tower Key", 0, 0, 0, true, false);
-		itemList.add(z);
 		z = new Items("Chest Key", 0, 0, 0, true, false);
 		itemList.add(z);
 		//Misc
 		z = new Items("Gas Lantern", 0, 0, 0, true, false);
 		itemList.add(z);
-		z = new Items("Boat Part 1", 0, 0, 0, true, false);
+		z = new Items("Stupid Award", 0, 0, 0, true, false);
 		itemList.add(z);
-		z = new Items("Boat Part 2", 0, 0, 0, true, false);
+		z = new Items("Flashlight", 0, 0, 0, true, false);
 		itemList.add(z);
-		z = new Items("Boat Part 3", 0, 0, 0, true, false);
+		z = new Items("Boat Part 1", 0, 0, 0, true, false);//in the bedroom
+		itemList.add(z);
+		z = new Items("Boat Part 2", 0, 0, 0, true, false);//in the attic
+		itemList.add(z);
+		z = new Items("Boat Part 3", 0, 0, 0, true, false);//in the top of the tower behind the three headed dog
+		itemList.add(z);
+		z = new Items("Boat Part 4", 0, 0, 0, true, false);
+		itemList.add(z);
+		z = new Items("Boat Part 5", 0, 0, 0, true, false);//in the cemetery
+		itemList.add(z);
+		z = new Items("Boat Part 6", 0, 0, 0, true, false);
+		itemList.add(z);
+		z = new Items("Boat Part 7", 0, 0, 0, true, false);
+		itemList.add(z);
+		z = new Items("Boat Part 8", 0, 0, 0, true, false);
+		itemList.add(z);
+		z = new Items("Boat Part 9", 0, 0, 0, true, false);// in  the cabinet
+		itemList.add(z);
+		z = new Items("Boat Part 10", 0, 0, 0, true, false);
 		itemList.add(z);
 
 		Containers c = new Containers("Cabinet");
 		c.items.add("Long Sword");
-		c.items.add("Gas Lantern");				
+		c.items.add("Gas Lantern");
+		c.items.add("Boat Part 9");
 		c.requiresKey = "Cabinet Key";
 		itemList.add(c);
 
 		c = new Containers("Chest");
 		c.items.add("Damascus Sword");  
 		c.requiresKey = "Chest Key";
-		itemList.add(c);	
+		itemList.add(c);
+		
+		c = new Containers("Cave");
+		c.items.add("Boat Part 4");
+		c.requiresKey = "Flashlight";
+		itemList.add(c);
 
 		for (Items item : itemList){
 			System.out.println(item.name);
