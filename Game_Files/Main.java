@@ -146,13 +146,30 @@ public class Main {
 			System.out.println("You can't go that way!");
 			return;
 		}
+		if (newRoom == 22 && currRoomID == 21) {	//cave entrance, only accessible from room 21 or ____			
+			for (Items item : itemList){
+				if (item.name.equals("Flashlight")  && item.inInventory){
+					newRoom = 23;	//magically move to room 23 -- the cave entrance that is lit by flashlight
+				}
+			}
+		}
+		
+		if (newRoom == 27 && currRoomID == 25) {			
+			for (Items item : itemList){
+				if (item.name.equals("Gold Coins")  && item.inInventory){
+					newRoom = 28;
+				}
+			}
+		}
+		
 		currRoomID = newRoom;
 		updateCurrentRoom(currRoomID);
-		System.out.println("You are now at "+ currentRoom.getTitle() + ". " + currentRoom.getDesc());
+		System.out.println("You are now at "+ currentRoom.getTitle() + currentRoom.getDesc());
 		listItemsinRoom();
+	}
 		//start combat here if there is a monster in the room???
 		//new Combat(player);
-	}
+				
 
 	void listItemsinRoom() {
 		if (currentRoom.roomItems.size() <= 0) return; //nothing in the room
@@ -311,6 +328,8 @@ public class Main {
 		//Misc
 		z = new Items("Gas Lantern", 0, 0, 0, true, false);
 		itemList.add(z);
+		z = new Items("Gold Coins", 0, 0, 0, true, false);
+		itemList.add(z);
 		z = new Items("Stupid Award", 0, 0, 0, true, false);
 		itemList.add(z);
 		z = new Items("Flashlight", 0, 0, 0, true, false);
@@ -348,11 +367,6 @@ public class Main {
 		c.requiresKey = "Chest Key";
 		itemList.add(c);
 		
-		c = new Containers("Cave");
-		c.items.add("Boat Part 4");
-		c.requiresKey = "Flashlight";
-		itemList.add(c);
-
 		for (Items item : itemList){
 			System.out.println(item.name);
 		}
