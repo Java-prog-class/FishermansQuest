@@ -188,30 +188,70 @@ public class Rooms{
 				+ "to be a cave enterance beside the ladder.";
 		roomList.add(r);
 		
-		r = new Rooms(22, "--Cave Enterance--","Its dark.You can't see unless you have a flashlight.");
+		r = new Rooms(22, "--Cave Entrance--","Its dark. You can't see unless you have a flashlight.");
 		r.setExits(21,0,0,0,0,0);
-		r.roomItems.add("Cave");
-		r.long_desc = " ";
+		r.long_desc = "You cant see anything or enter unless you have a flashlight.";
 		roomList.add(r);
 		
-		r = new Rooms(23, "  ","   ");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = " ";
+		r = new Rooms(23, "--Cave Entrance--","Slime lines the walls, along with some bones and sharp rocks.");
+		r.setExits(21,0,0,24,0,0); 
+		r.long_desc = "A boat piece lays infront of you.";
+		r.roomItems.add("Boat Part 4");
 		roomList.add(r);
 		
-		r = new Rooms(24, "  ","   ");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = " ";
+		r = new Rooms(24, "--Deep Cavern--","A dim purple light appears around the corner to the east.");
+		r.setExits(23,25,26,0,0,0); 
+		r.long_desc = "More sharp rocks. More nothing to be seen.";
 		roomList.add(r);
 		
-		r = new Rooms(25, "  ","   ");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = " ";
+		r = new Rooms(25, "--Portal Entrance--","Swirls of purple and blue blind your eyes.");
+		r.setExits(0,27,0,24,0,0); 
+		r.long_desc = "You see faces in the portal. They smile and whisper hello to you.";
 		roomList.add(r);
 		
-		r = new Rooms(26, "  ","   ");
+		r = new Rooms(26, "--Dead End--","Human remains Splattered on the wall.");
+		r.setExits(24,0,0,0,0,0); 
+		r.long_desc = "Bloody chest sits in front of you. Is it a mimic?";
+		roomList.add(r);
+		
+		r = new Rooms(27, "--Infernum--","You must pay thenatos the fee to get across the river.");
 		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = " ";
+		r.long_desc = "Spirits roam around you. The heat is intense.";
+		roomList.add(r);
+		
+		r = new Rooms(28, "--Infernum--","You pay the toll. You may get across now the the gates of hades.");
+		r.setExits(0,0,0,0,0,0); 
+		r.long_desc = "";
+		roomList.add(r);
+		
+		r = new Rooms(29, "","");
+		r.setExits(0,0,0,0,0,0); 
+		r.long_desc = "";
+		roomList.add(r);
+		
+		r = new Rooms(30, "","");
+		r.setExits(0,0,0,0,0,0); 
+		r.long_desc = "";
+		roomList.add(r);
+		
+		r = new Rooms(31, "","");
+		r.setExits(0,0,0,0,0,0); 
+		r.long_desc = "";
+		roomList.add(r);
+		
+		r = new Rooms(32, "","");
+		r.setExits(0,0,0,0,0,0); 
+		r.long_desc = "";
+		roomList.add(r);
+		
+		r = new Rooms(33, "","");
+		r.setExits(0,0,0,0,0,0); 
+		r.long_desc = "";
+		roomList.add(r);
+		
+		r = new Rooms(34, "","");
+		r.setExits(0,0,0,0,0,0); 
+		r.long_desc = "";
 		roomList.add(r);
 	}
 }
