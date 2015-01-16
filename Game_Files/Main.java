@@ -114,13 +114,7 @@ public class Main {
 				takeItem(minusOneWord(words));
 			}
 			break;
-			
-		case "Check":           //checks your health and armour
-			//if (word2.equals("STATS")){
-			//	System.out.println(player.toString());
-			//}
-			break;
-			
+				
 		case "I":
 		case "Inventory":
 			for (Items item : itemList){
@@ -156,7 +150,7 @@ public class Main {
 		
 		if (newRoom == 27 && currRoomID == 25) {			
 			for (Items item : itemList){
-				if (item.name.equals("Gold Coins")  && item.inInventory){
+				if (item.name.equals("Coins")  && item.inInventory){
 					newRoom = 28;
 				}
 			}
@@ -167,10 +161,7 @@ public class Main {
 		System.out.println("You are now at "+ currentRoom.getTitle() + currentRoom.getDesc());
 		listItemsinRoom();
 	}
-		//start combat here if there is a monster in the room???
-		//new Combat(player);
 				
-
 	void listItemsinRoom() {
 		if (currentRoom.roomItems.size() <= 0) return; //nothing in the room
 		System.out.print("You see a ");
@@ -275,17 +266,17 @@ public class Main {
 	}
 	
 	String minusOneWord(String[] w) {
-		String s = "";
+		String s = " ";
 		for (int i=1; i<w.length; i++) {
-			s = s + w[i] + "";
+			s = s + w[i] + " ";
 		}
 		return s.trim();
 	}
 	
 	String minusTwoWords(String[] w) {
-		String s = "";
+		String s = " ";
 		for (int i=2; i<w.length; i++) {
-			s = s + w[i] + "";
+			s = s + w[i] + " ";
 		}
 		return s.trim();
 	}
@@ -293,58 +284,58 @@ public class Main {
 	//Items(String name, int h, int am, int dm, boolean carry, boolean mine(is it in your inventory?)) {
 	void makeItems() {
 		//food
-		Items z = new Items("Sandwich", 15, 0,0,true, false);		
+		Items z = new Items("Sandwich", 15, 0,0,true, false);//in the beach		
 		itemList.add(z);
-		z = new Items("Banana", 5, 0,0,true, false);
+		z = new Items("Banana", 5, 0,0,true, false);//in the beach
 		itemList.add(z);
 		//potions
-		z = new Items("Healing Potion", 50, 0, 0, true, false);
+		z = new Items("Healing Potion", 50, 0, 0, true, false);//in the laberatory
 		itemList.add(z);
-		z = new Items("Damage/Rage Potion", 0, 80, 0, true, false);
+		z = new Items("Damage/Rage Potion", 0, 80, 0, true, false);//in the laberatory
 		itemList.add(z);
 		// Weapons
-		z = new Items("Kitchen knife", 0, 10, 0, true, false);
+		z = new Items("Knife", 0, 10, 0, true, false);//in the beach
 		itemList.add(z);
-		z = new Items("Damascus Sword", 0, 60, 10, true, false);
+		z = new Items("Damascus Sword", 0, 60, 10, true, false);//in the chest
 		itemList.add(z);
-		z = new Items("Long Sword", 0, 50, 20, true, false);
+		z = new Items("Long Sword", 0, 50, 20, true, false);//in the cabinet
 		itemList.add(z);
-		z = new Items("Mace", 0, 30, 5, true, false);
+		z = new Items("Mace", 0, 30, 5, true, false);//in the attic
 		itemList.add(z);
 		// Armour
-		z = new Items("Iron Helmet", 0, 0, 40, true, false);
+		z = new Items("Iron Helmet", 0, 0, 40, true, false);//in the crypt
 		itemList.add(z);
-		z = new Items("Chest Plate", 0, 0, 40, true, false);
+		z = new Items("Chest Plate", 0, 0, 40, true, false);//in the crypt
 		itemList.add(z);
-		z = new Items("Plate Leggings", 0, 0, 40, true, false);
+		z = new Items("Plate Leggings", 0, 0, 40, true, false);//in the crypt
 		itemList.add(z);
-		z = new Items("Shield", 0, 0, 100, true, false);
+		z = new Items("Shield", 0, 0, 100, true, false);//in the crypt
 		itemList.add(z);
 		//Keys
-		z = new Items("Cabinet Key", 0, 0, 0, true, false);	    
+		z = new Items("Cabinet Key", 0, 0, 0, true, false);//in the bedroom    
 		itemList.add(z);
-		z = new Items("Chest Key", 0, 0, 0, true, false);
+		z = new Items("Chest Key", 0, 0, 0, true, false);//in the beach
 		itemList.add(z);
 		//Misc
-		z = new Items("Gas Lantern", 0, 0, 0, true, false);
+		z = new Items("Gas Lantern", 0, 0, 0, true, false);//in the cabinet
 		itemList.add(z);
-		z = new Items("Gold Coins", 0, 0, 0, true, false);
+		z = new Items("Coins", 0, 0, 0, true, false);//in the village ruins
 		itemList.add(z);
-		z = new Items("Stupid Award", 0, 0, 0, true, false);
+		z = new Items("Stupid Award", 0, 0, 0, true, false);//in the stupid hole
 		itemList.add(z);
-		z = new Items("Flashlight", 0, 0, 0, true, false);
+		z = new Items("Flashlight", 0, 0, 0, true, false);//in the cemetery
 		itemList.add(z);
 		z = new Items("Boat Part 1", 0, 0, 0, true, false);//in the bedroom
 		itemList.add(z);
 		z = new Items("Boat Part 2", 0, 0, 0, true, false);//in the attic
 		itemList.add(z);
-		z = new Items("Boat Part 3", 0, 0, 0, true, false);//in the top of the tower behind the three headed dog
+		z = new Items("Boat Part 3", 0, 0, 0, true, false);//in the top of the tower behind the troll (impliment combat later).
 		itemList.add(z);
 		z = new Items("Boat Part 4", 0, 0, 0, true, false);
 		itemList.add(z);
 		z = new Items("Boat Part 5", 0, 0, 0, true, false);//in the cemetery
 		itemList.add(z);
-		z = new Items("Boat Part 6", 0, 0, 0, true, false);
+		z = new Items("Boat Part 6", 0, 0, 0, true, false);//in chest 1
 		itemList.add(z);
 		z = new Items("Boat Part 7", 0, 0, 0, true, false);
 		itemList.add(z);
@@ -363,7 +354,8 @@ public class Main {
 		itemList.add(c);
 
 		c = new Containers("Chest");
-		c.items.add("Damascus Sword");  
+		c.items.add("Damascus Sword");
+		c.items.add("Boat part 6");
 		c.requiresKey = "Chest Key";
 		itemList.add(c);
 		
