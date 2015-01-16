@@ -58,7 +58,7 @@ public class Rooms{
 				+ " that you stored your stuff is broken.";
 		r.roomItems.add("Sandwich");	
 		r.roomItems.add("Banana");
-		r.roomItems.add("Kitchen Knife");
+		r.roomItems.add("Knife");
 		r.roomItems.add("Chest Key");
 		roomList.add(r);
 		
@@ -117,17 +117,16 @@ public class Rooms{
 		r.roomItems.add("Shield");
 		roomList.add(r);
 		
-		r = new Rooms(10, "--Laboratory--\n\n", "\nA table with stuff on it. Smashed beakers on the floor and a lab"
+		r = new Rooms(10, "--Laboratory--\n\n", "\nA table with stuff on it. Smashed beakers on the floor and lab"
 				+ " equipment. None of it is worth taking.");
 		r.setExits(0,0,0,9,0,0);
 		r.long_desc = "";
 		r.roomItems.add("Health Potion");
-		r.roomItems.add("Damage/Rage Potion");
 		roomList.add(r);
 		
-		r = new Rooms(11, "--Underground Pathway--\n\n", "\nLeads to an old door.");
+		r = new Rooms(11, "--Underground Pathway--\n\n", "\nLeads to an old wooden door.");
 		r.setExits(0,9,0,12,0,0);
-		r.long_desc = "More slobber is on the floor, looks like a trail leading to what appears to be a a door.";
+		r.long_desc = "More slobber is on the floor, looks like a trail leading to what appears to be a door.";
 		roomList.add(r);
 		
 		r = new Rooms(12, "--Base of Tower--\n\n", "\nStairs are leading up to the top. Watch your step!");
@@ -138,7 +137,7 @@ public class Rooms{
 		
 		r = new Rooms(13, "--Top of Tower--\n\n", " A monster is sleeping. SHHHHHH.");
 		r.setExits(0,0,0,14,0,12);
-		r.long_desc = "A Sleeping 3 head dog lays in front of a boat piece. Looks like part of the engine. And a "
+		r.long_desc = "A Sleeping troll lays in front of a boat piece. Looks like part\nof the engine. And a "
 				+ "window that you can jump out of. should you take the chance?";
 		r.roomItems.add("Boat Part 3");
 		roomList.add(r);
@@ -148,17 +147,17 @@ public class Rooms{
 		r.long_desc = "Thick forest monkey sit in trees watching you. A path leads more north, and a path to the west.";
 		roomList.add(r);
 		
-		r = new Rooms(15, "--West Pathway--", "Starting to get gloomy, a dark presence roams the air.");
+		r = new Rooms(15, "--West Pathway--\n\n", "Starting to get gloomy, a dark presence roams the air.");
 		r.setExits(0,14,0,17,0,0);
 		r.long_desc = "Looks like the trees are dying. Again nothing too special.";
 		roomList.add(r);
 		
-		r = new Rooms(16, "--North Pathwway--\n\n", "Long pathway to some where. More trees with more staring monkeys.");
+		r = new Rooms(16, "--North Pathway--\n\n", "Long pathway to some where. More trees with more staring monkeys.");
 		r.setExits(19,0,14,0,0,0);
 		r.long_desc = "The monkeys....all they do is stare... why? nobody knows.";
 		roomList.add(r);
 		
-		r = new Rooms(17, "--Cemetery--"," Its Quiet, tooo quiet. Nothing but grave stones and the\n"
+		r = new Rooms(17, "--Cemetery--\n\n"," Its Quiet, tooo quiet. Nothing but grave stones and the\n"
 				+ "precense of death. And maybe something else..");
 		r.setExits(0,15,18,0,0,0); 
 		r.long_desc = "Rusty gate entrance. Dead trees and old tomb stones. OH and a boat piece.";
@@ -166,77 +165,78 @@ public class Rooms{
 		r.roomItems.add("Flashlight");
 		roomList.add(r);
 		
-		r = new Rooms(18, "--Stupid Hole--","You have fallen in a hole. You have won the Stupid Award! please, take it!");
+		r = new Rooms(18, "--Stupid Hole--\n\n","You have fallen in a hole. You have won the Stupid Award! please, take it!");
 		r.setExits(0,0,0,0,17,0); 
 		r.long_desc = "Did you seriously just look around in the hole? No get out! Theres nothing here!";
 		r.roomItems.add("Stupid Award");
 		roomList.add(r);
 		
-		r = new Rooms(19, "--Bridge--","Watch out, it could break.");
+		r = new Rooms(19, "--Bridge--\n\n","Watch out, it could break.");
 		r.setExits(20,0,16,0,0,21); 
 		r.long_desc = "Fragile wood. Could break. Down below there's a river. Theres also a ladder going down.";
 		roomList.add(r);
 		
-		r = new Rooms(20, "--Village Ruins--","The place looks burnt. Almost nothing is salvageable.");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = " ";
+		r = new Rooms(20, "--Village Ruins--\n\n","The place looks burnt. Almost nothing is salvageable.");
+		r.setExits(31,0,19,0,0,0); 
+		r.long_desc = "Was this village just burnt down? looks recent. Ash falls from ruined huts. Some burning wood.";
+		r.roomItems.add("Coins");
 		roomList.add(r);
 		
-		r = new Rooms(21, "--River--","Strong current. Sea monsters lurk in the water i bet.");
+		r = new Rooms(21, "--River--\n\n","Strong current. Sea monsters lurk in the water i bet.");
 		r.setExits(0,0,22,0,19,0); 
 		r.long_desc = "Turns out there is sea monsters that you can see in the river. Its too dangerous. Also what looks\n"
 				+ "to be a cave enterance beside the ladder.";
 		roomList.add(r);
 		
-		r = new Rooms(22, "--Cave Entrance--","Its dark. You can't see unless you have a flashlight.");
+		r = new Rooms(22, "--Cave Entrance--\n\n","Its dark. You can't see unless you have a flashlight.");
 		r.setExits(21,0,0,0,0,0);
 		r.long_desc = "You cant see anything or enter unless you have a flashlight.";
 		roomList.add(r);
 		
-		r = new Rooms(23, "--Cave Entrance--","Slime lines the walls, along with some bones and sharp rocks.");
-		r.setExits(21,0,0,24,0,0); 
+		r = new Rooms(23, "--Cave Entrance--\n\n","Slime lines the walls, along with some bones and sharp rocks.");
+		r.setExits(21,0,24,0,0,0); 
 		r.long_desc = "A boat piece lays infront of you.";
 		r.roomItems.add("Boat Part 4");
 		roomList.add(r);
 		
-		r = new Rooms(24, "--Deep Cavern--","A dim purple light appears around the corner to the east.");
+		r = new Rooms(24, "--Deep Cavern--\n\n","A dim purple light appears around the corner to the east.");
 		r.setExits(23,25,26,0,0,0); 
 		r.long_desc = "More sharp rocks. More nothing to be seen.";
 		roomList.add(r);
 		
-		r = new Rooms(25, "--Portal Entrance--","Swirls of purple and blue blind your eyes.");
+		r = new Rooms(25, "--Portal Entrance--\n\n","Swirls of purple and blue blind your eyes.");
 		r.setExits(0,27,0,24,0,0); 
 		r.long_desc = "You see faces in the portal. They smile and whisper hello to you.";
 		roomList.add(r);
 		
-		r = new Rooms(26, "--Dead End--","Human remains Splattered on the wall.");
+		r = new Rooms(26, "--Dead End--\n\n","Human remains Splattered on the wall.");
 		r.setExits(24,0,0,0,0,0); 
 		r.long_desc = "Bloody chest sits in front of you. Is it a mimic?";
 		roomList.add(r);
 		
-		r = new Rooms(27, "--Infernum--","You must pay thenatos the fee to get across the river.");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = "Spirits roam around you. The heat is intense.";
+		r = new Rooms(27, "--Infernum--\n\n","You must pay thenatos the toll to get across the river.");
+		r.setExits(0,0,0,25,0,0); 
+		r.long_desc = "Spirits roam around you. The heat is intense. You can barely stand it.";
 		roomList.add(r);
 		
-		r = new Rooms(28, "--Infernum--","You pay the toll. You may get across now the the gates of hades.");
-		r.setExits(0,0,0,0,0,0); 
+		r = new Rooms(28, "--Infernum--\n\n","You pay the toll. You may get across now the the gates of hades.");
+		r.setExits(0,29,0,25,0,0); 
+		r.long_desc = "Flames are around you. looks like hell. How are you still breahting?";
+		roomList.add(r);
+		
+		r = new Rooms(29, "--Gates Of Hades Palace--\n\n","You have successfully paid the fee. Stairs lead up.");
+		r.setExits(0,0,0,28,30,0); 
 		r.long_desc = "";
 		roomList.add(r);
 		
-		r = new Rooms(29, "","");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = "";
+		r = new Rooms(30, "--Hades Palace--\n\n","The door creeks open. Dark but very luxurious.");
+		r.setExits(0,0,0,0,0,29); 
+		r.long_desc = "Gold door handle, red welcome mat. You hear barking. Sounds like multiple dogs.";
 		roomList.add(r);
 		
-		r = new Rooms(30, "","");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = "";
-		roomList.add(r);
-		
-		r = new Rooms(31, "","");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = "";
+		r = new Rooms(31, "--Burnt Down Tower--\n\n","Too much burnt stuff to even know what it is.");
+		r.setExits(0,0,20,0,0,0); 
+		r.long_desc = "Nothing to pick from the remains.";
 		roomList.add(r);
 		
 		r = new Rooms(32, "","");
