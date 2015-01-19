@@ -326,14 +326,9 @@ public class Rooms{
 		r.roomItems.add("Metal Plate 3");
 		roomList.add(r);
 		
-		r = new Rooms(47, "--Wrecked Boat--\n\n","The boat is wrecked. It needs parts for the engine and to replace the holes");
-		r.setExits(1,0,0,0,0,0);
-		r.long_desc = "The boat is in bad shape.";
-		roomList.add(r);
-		
-		r = new Rooms(48, "--Repaired Boat--\n\n","Your boat is fixed! you can now go south and get off this island and go home!!!");
+		r = new Rooms(47, "--Fixed Boat--\n\n","The boat is fixed! you are saved and thats the end! gameover!.");
 		r.setExits(0,0,0,0,0,0);
-		r.long_desc = "You have one last look at the island before you sail away.";
+		r.long_desc = "Game over.";
 		roomList.add(r);
 	}
 }
