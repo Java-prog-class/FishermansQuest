@@ -10,7 +10,8 @@ public class Main {
 	int currRoomID = 1;
 	Rooms currentRoom = new Rooms(0,"","");
 	
-	public static void main(String[]args){
+	public static void main(String[]args) {
+		System.out.println("COMMANDS ARE:\nNorth or N\nEast or E\nSouth or S\nWest or W\nUp or U\nDown or D\nInventory or I\nLook\nTake\nGrab\nOpen\n");
 		new Main();
 	}
 
@@ -19,7 +20,7 @@ public class Main {
 		boolean playing = true;
 		String command = " ";
 		Rooms.setupRooms(roomList);
-		makeItems();
+		//makeItems();
 		updateCurrentRoom(currRoomID);
 
 		//main game loop
@@ -27,10 +28,8 @@ public class Main {
 		while (playing) {
 			command = getCommand();
 			playing = parseCommand(command);
-
 			//set playing to false if the user is dead
 		}		
-
 	}
 
 	void updateCurrentRoom(int n) {
@@ -77,9 +76,8 @@ public class Main {
 		/** This is the main switch statement that decides what command to do **/
 		switch(word1) {
 		case "Quit":
-			System.out.print("Do you really want to quit the game?");
 			return false;
-
+			
 		case "N":
 		case "E":
 		case "S":
@@ -124,8 +122,6 @@ public class Main {
 			}
 			break;
 		case "Open":
-		case "Use":
-			//opens container
 			openContainer(word2);
 			break;
 		default: 
@@ -155,6 +151,25 @@ public class Main {
 				}
 			}
 		}
+		
+		
+		if (newRoom == 36 && currRoomID == 21) {			
+			for (Items item : itemList){
+				if (item.name.equals("Rope") && item.inInventory){
+					newRoom = 37;
+				}
+			}
+		}
+		
+		if (newRoom == 42 && currRoomID == 41) {			
+			for (Items item : itemList){
+				if (item.name.equals("Scuba Mask") && item.inInventory){
+					newRoom = 43;
+				}
+			}
+		}
+		
+		
 		
 		currRoomID = newRoom;
 		updateCurrentRoom(currRoomID);
@@ -255,8 +270,7 @@ public class Main {
 				}
 			}
 			System.out.println("You need the " + container.requiresKey + " to open this.");
-		}
-		
+			}
 	}
 	
 	String capitalizeFirstLetter(String original){
@@ -314,9 +328,19 @@ public class Main {
 		//Keys
 		z = new Items("Cabinet Key", 0, 0, 0, true, false);//in the bedroom    
 		itemList.add(z);
-		z = new Items("Chest Key", 0, 0, 0, true, false);//in the beach
+		z = new Items("Chest Key", 0, 0, 0, true, false);//at the beach
 		itemList.add(z);
 		//Misc
+		z = new Items("Scuba Mask", 0, 0, 0, true, false);//in the dead end
+		itemList.add(z);
+		z = new Items("Rope", 0, 0, 0, true, false);//at the cliff
+		itemList.add(z);
+		z = new Items("Hades Magazines", 0, 0, 0, true, false);//in the trap door
+		itemList.add(z);
+		z = new Items("Ruby", 0, 0, 0, true, false);// in the Box
+		itemList.add(z);
+		z = new Items("Picklock Set", 0, 0, 0, true, false);//in the bedroom
+		itemList.add(z);
 		z = new Items("Gas Lantern", 0, 0, 0, true, false);//in the cabinet
 		itemList.add(z);
 		z = new Items("Coins", 0, 0, 0, true, false);//in the village ruins
@@ -325,38 +349,42 @@ public class Main {
 		itemList.add(z);
 		z = new Items("Flashlight", 0, 0, 0, true, false);//in the cemetery
 		itemList.add(z);
-		z = new Items("Boat Part 1", 0, 0, 0, true, false);//in the bedroom
+		//Boat Parts
+		z = new Items("Steering Wheel", 0, 0, 0, true, false);//in the bedroom
 		itemList.add(z);
-		z = new Items("Boat Part 2", 0, 0, 0, true, false);//in the attic
+		z = new Items("Metal plate 1", 0, 0, 0, true, false);//in the attic
 		itemList.add(z);
-		z = new Items("Boat Part 3", 0, 0, 0, true, false);//in the top of the tower behind the troll (impliment combat later).
+		z = new Items("Engine Part 1", 0, 0, 0, true, false);//in the top of the tower behind the troll (impliment combat later).
 		itemList.add(z);
-		z = new Items("Boat Part 4", 0, 0, 0, true, false);
+		z = new Items("Pipes", 0, 0, 0, true, false);//in the burnt house
 		itemList.add(z);
-		z = new Items("Boat Part 5", 0, 0, 0, true, false);//in the cemetery
+		z = new Items("Engine Part 2", 0, 0, 0, true, false);//in the cemetery
 		itemList.add(z);
-		z = new Items("Boat Part 6", 0, 0, 0, true, false);//in chest 1
+		z = new Items("Metal Plate 2", 0, 0, 0, true, false);//in hades bedroom
 		itemList.add(z);
-		z = new Items("Boat Part 7", 0, 0, 0, true, false);
+		z = new Items("Metal Plate 3", 0, 0, 0, true, false);//in the storage room
 		itemList.add(z);
-		z = new Items("Boat Part 8", 0, 0, 0, true, false);
+		z = new Items("Engine Part 3", 0, 0, 0, true, false);//in the underground hideout
 		itemList.add(z);
-		z = new Items("Boat Part 9", 0, 0, 0, true, false);// in  the cabinet
+		z = new Items("Metal Plate 4", 0, 0, 0, true, false);//at the water fall
 		itemList.add(z);
-		z = new Items("Boat Part 10", 0, 0, 0, true, false);
+		z = new Items("Engine Part 4", 0, 0, 0, true, false);//on the cliff leading to the beach
 		itemList.add(z);
 
 		Containers c = new Containers("Cabinet");
 		c.items.add("Long Sword");
 		c.items.add("Gas Lantern");
-		c.items.add("Boat Part 9");
 		c.requiresKey = "Cabinet Key";
 		itemList.add(c);
 
 		c = new Containers("Chest");
 		c.items.add("Damascus Sword");
-		c.items.add("Boat part 6");
 		c.requiresKey = "Chest Key";
+		itemList.add(c);
+		
+		c = new Containers("Box");
+		c.items.add("Ruby");
+		c.requiresKey = "Picklock Set";
 		itemList.add(c);
 		
 		for (Items item : itemList){
