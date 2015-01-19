@@ -53,9 +53,9 @@ public class Rooms{
 
 		Rooms r = new Rooms(1, "--Beach--\n\n", "\nThick forest filled with tall trees. You cannot go around.");
 		//		   N E S W U D
-		r.setExits(2,0,0,0,0,0);
+		r.setExits(2,0,47,0,0,0);
 		r.long_desc = "The wind blows and the waves crash against your\nwrecked boat. It still needs parts. The crate"
-				+ " that you stored your stuff is broken.";
+				+ " that you stored your stuff is broken. Almost all your things are washed away.w";
 		r.roomItems.add("Sandwich");	
 		r.roomItems.add("Banana");
 		r.roomItems.add("Knife");
@@ -81,7 +81,8 @@ public class Rooms{
 		r.long_desc = "Boxes all over the place. Like someone was packing to leave. Special boat "
 				+ "part seems to be hanging\non thew wall in a show case. ";
 		r.roomItems.add("Cabinet Key");
-		r.roomItems.add("Boat Part 1");
+		r.roomItems.add("Steering Wheel");
+		r.roomItems.add("Picklock Set");
 		roomList.add(r);
 		
 		r = new Rooms(5, "--Hallway--\n\n", "\nNothing but the dim lighting of the candles.");
@@ -92,12 +93,12 @@ public class Rooms{
 		r = new Rooms(6, "--Hallway #2--\n\n", "\nGas lantern on the wall lighting the "
 				+ "rest of the hallway, along\nwith some stairs leading down to darkness.");
 		r.setExits(0,7,5,0,8,0);
-		r.long_desc = "";
+		r.long_desc = "Theres an attic above you.";
 		roomList.add(r);
 		
 		r = new Rooms(7, "--Basement Hallway--\n\n", "\nDarkness. Large webs surround the wall.");
 		r.setExits(0,0,9,6,0,0);
-		r.long_desc = "";
+		r.long_desc = "Roachs roam the hallway.";
 		
 		roomList.add(r);
 		
@@ -105,7 +106,7 @@ public class Rooms{
 		r.setExits(0,0,0,0,0,6);
 		r.long_desc = "Webs are all over the place! some dusty boating books, old clothes.";
 		r.roomItems.add("Mace");
-		r.roomItems.add("Boat Part 2");
+		r.roomItems.add("Metal Plate 1");
 		roomList.add(r);
 		
 		r = new Rooms(9, "--Crypt--\n\n", "Bones lay on the ground. Maybe a beast of some sort has been threw here..");
@@ -139,7 +140,7 @@ public class Rooms{
 		r.setExits(0,0,0,14,0,12);
 		r.long_desc = "A Sleeping troll lays in front of a boat piece. Looks like part\nof the engine. And a "
 				+ "window that you can jump out of. should you take the chance?";
-		r.roomItems.add("Boat Part 3");
+		r.roomItems.add("Engine Part 1");
 		roomList.add(r);
 		
 		r = new Rooms(14, "--Outside at the Bottom of Tower--\n\n", "luckly, you have landed in a bale of hay. That was close!");
@@ -161,7 +162,7 @@ public class Rooms{
 				+ "precense of death. And maybe something else..");
 		r.setExits(0,15,18,0,0,0); 
 		r.long_desc = "Rusty gate entrance. Dead trees and old tomb stones. OH and a boat piece.";
-		r.roomItems.add("Boat Part 5");
+		r.roomItems.add("Engine Part 2");
 		r.roomItems.add("Flashlight");
 		roomList.add(r);
 		
@@ -183,7 +184,7 @@ public class Rooms{
 		roomList.add(r);
 		
 		r = new Rooms(21, "--River--\n\n","Strong current. Sea monsters lurk in the water i bet.");
-		r.setExits(0,0,22,0,19,0); 
+		r.setExits(0,36,22,0,19,37); 
 		r.long_desc = "Turns out there is sea monsters that you can see in the river. Its too dangerous. Also what looks\n"
 				+ "to be a cave enterance beside the ladder.";
 		roomList.add(r);
@@ -211,7 +212,8 @@ public class Rooms{
 		
 		r = new Rooms(26, "--Dead End--\n\n","Human remains Splattered on the wall.");
 		r.setExits(24,0,0,0,0,0); 
-		r.long_desc = "Bloody chest sits in front of you. Is it a mimic?";
+		r.long_desc = "A dusty old scuba mask.";
+		r.roomItems.add("Scuba Mask");
 		roomList.add(r);
 		
 		r = new Rooms(27, "--Infernum--\n\n","You must pay thenatos the toll to get across the river.");
@@ -226,32 +228,112 @@ public class Rooms{
 		
 		r = new Rooms(29, "--Gates Of Hades Palace--\n\n","You have successfully paid the fee. Stairs lead up.");
 		r.setExits(0,0,0,28,30,0); 
-		r.long_desc = "";
+		r.long_desc = "They look evil. Does look like anyones home. Must be doing things.";
 		roomList.add(r);
 		
 		r = new Rooms(30, "--Hades Palace--\n\n","The door creeks open. Dark but very luxurious.");
-		r.setExits(0,0,0,0,0,29); 
+		r.setExits(0,33,0,0,0,29); 
 		r.long_desc = "Gold door handle, red welcome mat. You hear barking. Sounds like multiple dogs.";
 		roomList.add(r);
 		
 		r = new Rooms(31, "--Burnt Down Tower--\n\n","Too much burnt stuff to even know what it is.");
-		r.setExits(0,0,20,0,0,0); 
-		r.long_desc = "Nothing to pick from the remains.";
+		r.setExits(0,32,20,0,0,0); 
+		r.long_desc = "Nothing to pick from the ashes.";
 		roomList.add(r);
 		
-		r = new Rooms(32, "","");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = "";
+		r = new Rooms(32, "--Burnt house--\n\n","You See nothing special. Just the sun setting in the distance.");
+		r.setExits(0,35,0,31,0,0); 
+		r.long_desc = "A Boat piece is in the remains! And a dirty jewely box!";
+		r.roomItems.add("Pipes");
+		r.roomItems.add("Box");
 		roomList.add(r);
 		
-		r = new Rooms(33, "","");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = "";
+		r = new Rooms(33, "--Hades Bedroom--\n\n","Bed isnt made. He's not home. Must be out doing things.");
+		r.setExits(0,0,0,30,0,34); 
+		r.long_desc = "Where could he be? who knows. Mess all over his room. Probably not the best idea to steal froma god..";
+		r.roomItems.add("Metal Plate 2");
 		roomList.add(r);
 		
-		r = new Rooms(34, "","");
-		r.setExits(0,0,0,0,0,0); 
-		r.long_desc = "";
+		r = new Rooms(34, "--Trap door--\n\n","Looks like his secret stash. Some of the pages are stuck together. Ew.");
+		r.setExits(0,0,0,0,33,0); 
+		r.long_desc = "I dont think you want to take those but you can...";
+		r.roomItems.add("Hades Magazines");
+		roomList.add(r);
+		
+		r = new Rooms(35, "--Cliff--\n\n","You can see sea monsters in the distance. You will need more renforcments.");
+		r.setExits(0,0,0,32,0,0);
+		r.long_desc = "You will need more boat part to get off this island and survive from those sea monsters.";
+		r.roomItems.add("Rope");
+		roomList.add(r);
+		
+		r = new Rooms(36, "--Water Fall--\n\n","Theres a watterfall in front of you coming off of the tall\ncliff.");
+		r.setExits(0,0,0,21,0,0);
+		r.long_desc = "Maybe I could use a rope and throw it up there to attach it to that branch.";
+		r.roomItems.add("Metal Plate 4");
+		roomList.add(r);
+		
+		r = new Rooms(37, "--Water Fall--\n\n","You throw the rope up and pull. Its snug to the thick branch. You can climb up now.");
+		r.setExits(0,0,0,21,38,0);
+		r.long_desc = "The sea monsters look hungry. Dont fall in. Those sharp rocks wont feel good.";
+		roomList.add(r);
+		
+		r = new Rooms(38, "--Heavy Forest--\n\n","Thick forest. Its starting to get dark.");
+		r.setExits(0,39,0,0,0,37);
+		r.long_desc = "Luckily you have a flshlight. If not you couldnt see. Your gonna need to\nfind a spot where you can stay the night.";
+		roomList.add(r);
+		
+		r = new Rooms(39, "--Scary Pond--\n\n", "Seems really quiet. You cant drink this water. Its too dirty.");
+		r.setExits(0,0,40,38,0,41);
+		r.long_desc = "The forest is too thick to see through. You gonna just have to trust the path leading east.";
+		roomList.add(r);
+		
+		r = new Rooms(40, "--Cliff--\n\n","Smells like fresh water from the south.");
+		r.setExits(39,0,1,0,0,0);
+		r.long_desc = "You can see the beach and your wrecked boat in the distance. Looks like we can"
+				+ " get\ndown without hurting ourselves.";
+		r.roomItems.add("Engine Part 4");
+		roomList.add(r);
+		
+		r = new Rooms(41, "--In the Pond--\n\n","You realize its deeper than you thought. Can you go deeper?");
+		r.setExits(0,0,0,0,40,42);
+		r.long_desc = "Little fish swim around you not bothering you. Still not touching the bottom.";
+		roomList.add(r);
+		
+		r = new Rooms(42, "--Metal Hatch--\n\n","You cant go any father unless you have a scuba mask. Its getting hard to breath.");
+		r.setExits(0,0,0,0,41,0);
+		r.long_desc = "Your vision is blurred and your eyes hurt to look.";
+		roomList.add(r);
+		
+		r = new Rooms(43, "--Metal Hatch--\n\n","You can open the hatch and go down now.");
+		r.setExits(0,0,0,0,41,44);
+		r.long_desc = "Your vision is blurred and your eyes hurt to look.";
+		roomList.add(r);
+		
+		r = new Rooms(44, "--UnderGround Hideout--\n\n","You close the hatch. Looks like a hideout. Another room to the west.");
+		r.setExits(0,0,0,45,43,0);
+		r.long_desc = "Papers are all over the place. Rusty door.";
+		r.roomItems.add("Engine Part 3");
+		roomList.add(r);
+		
+		r = new Rooms(45, "--Long Hallway--\n\n","Theres a door at the end of the hallway.");
+		r.setExits(0,44,0,46,0,0);
+		r.long_desc = "The light flickers...";
+		roomList.add(r);
+		
+		r = new Rooms(46, "--Storage Room--\n\n","Theres boat pieces in here. But you only need the special part.");
+		r.setExits(0,45,0,0,0,0);
+		r.long_desc = "This must be an old place.";
+		r.roomItems.add("Metal Plate 3");
+		roomList.add(r);
+		
+		r = new Rooms(47, "--Wrecked Boat--\n\n","The boat is wrecked. It needs parts for the engine and to replace the holes");
+		r.setExits(1,0,0,0,0,0);
+		r.long_desc = "The boat is in bad shape.";
+		roomList.add(r);
+		
+		r = new Rooms(48, "--Repaired Boat--\n\n","Your boat is fixed! you can now go south and get off this island and go home!!!");
+		r.setExits(0,0,0,0,0,0);
+		r.long_desc = "You have one last look at the island before you sail away.";
 		roomList.add(r);
 	}
 }
