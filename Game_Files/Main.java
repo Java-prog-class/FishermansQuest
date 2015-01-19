@@ -9,7 +9,7 @@ public class Main {
 
 	int currRoomID = 1;
 	Rooms currentRoom = new Rooms(0,"","");
-	
+
 	public static void main(String[]args) {
 		System.out.println("COMMANDS ARE:\nNorth or N\nEast or E\nSouth or S\nWest or W\nUp or U\nDown or D\nInventory or I\nLook\nTake\nGrab\nOpen\n");
 		new Main();
@@ -20,7 +20,7 @@ public class Main {
 		boolean playing = true;
 		String command = " ";
 		Rooms.setupRooms(roomList);
-		//makeItems();
+		makeItems();
 		updateCurrentRoom(currRoomID);
 
 		//main game loop
@@ -72,12 +72,12 @@ public class Main {
 		//pre-parsing: remove GO (also remove "THE")
 		if (word1.equals("Go")) word1 = words[1];	//ie. GO NORTH --> NORTH
 
-		
+
 		/** This is the main switch statement that decides what command to do **/
 		switch(word1) {
 		case "Quit":
 			return false;
-			
+
 		case "N":
 		case "E":
 		case "S":
@@ -102,17 +102,17 @@ public class Main {
 				System.out.println(currentRoom.getTitle() + currentRoom.getLongDesc());
 				listItemsinRoom();				
 			}
-			
+
 			break;
 		case "Take":
-		case "Grab":				
+		case "Grab":			
 			if (word2.equals("The")) {
 				takeItem(minusTwoWords(words));
 			} else {
 				takeItem(minusOneWord(words));
 			}
 			break;
-				
+
 		case "I":
 		case "Inventory":
 			for (Items item : itemList){
@@ -123,6 +123,14 @@ public class Main {
 			break;
 		case "Open":
 			openContainer(word2);
+			break;
+		case "Repair":
+		case "Fix":
+		if	(word2.equals("Boat")){
+				fixBoat();
+		} else {
+			System.out.println(word2 + " is not fixable!");
+		}
 			break;
 		default: 
 			System.out.println("Sorry, I don't understand that command.");
@@ -143,7 +151,7 @@ public class Main {
 				}
 			}
 		}
-		
+
 		if (newRoom == 27 && currRoomID == 25) {			
 			for (Items item : itemList){
 				if (item.name.equals("Coins")  && item.inInventory){
@@ -151,8 +159,8 @@ public class Main {
 				}
 			}
 		}
-		
-		
+
+
 		if (newRoom == 36 && currRoomID == 21) {			
 			for (Items item : itemList){
 				if (item.name.equals("Rope") && item.inInventory){
@@ -160,7 +168,7 @@ public class Main {
 				}
 			}
 		}
-		
+
 		if (newRoom == 42 && currRoomID == 41) {			
 			for (Items item : itemList){
 				if (item.name.equals("Scuba Mask") && item.inInventory){
@@ -168,15 +176,12 @@ public class Main {
 				}
 			}
 		}
-		
-		
-		
 		currRoomID = newRoom;
 		updateCurrentRoom(currRoomID);
 		System.out.println("You are now at "+ currentRoom.getTitle() + currentRoom.getDesc());
 		listItemsinRoom();
 	}
-				
+
 	void listItemsinRoom() {
 		if (currentRoom.roomItems.size() <= 0) return; //nothing in the room
 		System.out.print("You see a ");
@@ -186,11 +191,19 @@ public class Main {
 	}
 
 	//itemName can be multiple words
-	void takeItem(String itemName){
-		
-		if (!(currentRoom.roomItems.contains(itemName))) {
+	void takeItem(String itemName){		
+
+		//see if it is in the container.
+		//1. check each item in the room to see if it is a container
+		//2. check the container to see if it has the item.
+		//3. this must also take the item from the container and add it to the inventory.
+		//		boolean itemTaken = checkForItemInContainer(itemName);
+		//		if (itemTaken) return;
+
+
+		//see if it is in room
+		if (!(currentRoom.roomItems.contains(itemName))) { 		
 			System.out.println("There is no " + itemName + " here.");
-			return;
 		}
 
 		//the itemList has all of the items created along with their properties
@@ -223,7 +236,7 @@ public class Main {
 	void inInventory(boolean inInventory){
 
 	}
-	
+
 	void openContainer(String cname) {		
 
 		/*1. is the container in the room
@@ -270,131 +283,193 @@ public class Main {
 				}
 			}
 			System.out.println("You need the " + container.requiresKey + " to open this.");
+		}
+	}
+
+	void fixBoat(){
+		//see if player is on beach fine. If not on beach then say "there is no boat here"
+		if (currRoomID != 1) {
+			System.out.println("There is no boat here to fix!"); 
+			return;
+		}
+		
+		//see if player has all 10 boat pieces (in inventory)	
+		for (Items item : itemList){		
+			if (item.name.equals("Steering Wheel")  && !(item.inInventory)){
+				System.out.println("Missing Steering Wheel!");
+				return;
 			}
-	}
-	
-	String capitalizeFirstLetter(String original){
-		if(original.length() == 0)
-			return original;
-		return original.substring(0, 1).toUpperCase() + original.substring(1);
-	}
-	
-	String minusOneWord(String[] w) {
-		String s = " ";
-		for (int i=1; i<w.length; i++) {
-			s = s + w[i] + " ";
-		}
-		return s.trim();
-	}
-	
-	String minusTwoWords(String[] w) {
-		String s = " ";
-		for (int i=2; i<w.length; i++) {
-			s = s + w[i] + " ";
-		}
-		return s.trim();
-	}
-	
-	//Items(String name, int h, int am, int dm, boolean carry, boolean mine(is it in your inventory?)) {
-	void makeItems() {
-		//food
-		Items z = new Items("Sandwich", 15, 0,0,true, false);//in the beach		
-		itemList.add(z);
-		z = new Items("Banana", 5, 0,0,true, false);//in the beach
-		itemList.add(z);
-		//potions
-		z = new Items("Healing Potion", 50, 0, 0, true, false);//in the laberatory
-		itemList.add(z);
-		z = new Items("Damage/Rage Potion", 0, 80, 0, true, false);//in the laberatory
-		itemList.add(z);
-		// Weapons
-		z = new Items("Knife", 0, 10, 0, true, false);//in the beach
-		itemList.add(z);
-		z = new Items("Damascus Sword", 0, 60, 10, true, false);//in the chest
-		itemList.add(z);
-		z = new Items("Long Sword", 0, 50, 20, true, false);//in the cabinet
-		itemList.add(z);
-		z = new Items("Mace", 0, 30, 5, true, false);//in the attic
-		itemList.add(z);
-		// Armour
-		z = new Items("Iron Helmet", 0, 0, 40, true, false);//in the crypt
-		itemList.add(z);
-		z = new Items("Chest Plate", 0, 0, 40, true, false);//in the crypt
-		itemList.add(z);
-		z = new Items("Plate Leggings", 0, 0, 40, true, false);//in the crypt
-		itemList.add(z);
-		z = new Items("Shield", 0, 0, 100, true, false);//in the crypt
-		itemList.add(z);
-		//Keys
-		z = new Items("Cabinet Key", 0, 0, 0, true, false);//in the bedroom    
-		itemList.add(z);
-		z = new Items("Chest Key", 0, 0, 0, true, false);//at the beach
-		itemList.add(z);
-		//Misc
-		z = new Items("Scuba Mask", 0, 0, 0, true, false);//in the dead end
-		itemList.add(z);
-		z = new Items("Rope", 0, 0, 0, true, false);//at the cliff
-		itemList.add(z);
-		z = new Items("Hades Magazines", 0, 0, 0, true, false);//in the trap door
-		itemList.add(z);
-		z = new Items("Ruby", 0, 0, 0, true, false);// in the Box
-		itemList.add(z);
-		z = new Items("Picklock Set", 0, 0, 0, true, false);//in the bedroom
-		itemList.add(z);
-		z = new Items("Gas Lantern", 0, 0, 0, true, false);//in the cabinet
-		itemList.add(z);
-		z = new Items("Coins", 0, 0, 0, true, false);//in the village ruins
-		itemList.add(z);
-		z = new Items("Stupid Award", 0, 0, 0, true, false);//in the stupid hole
-		itemList.add(z);
-		z = new Items("Flashlight", 0, 0, 0, true, false);//in the cemetery
-		itemList.add(z);
-		//Boat Parts
-		z = new Items("Steering Wheel", 0, 0, 0, true, false);//in the bedroom
-		itemList.add(z);
-		z = new Items("Metal plate 1", 0, 0, 0, true, false);//in the attic
-		itemList.add(z);
-		z = new Items("Engine Part 1", 0, 0, 0, true, false);//in the top of the tower behind the troll (impliment combat later).
-		itemList.add(z);
-		z = new Items("Pipes", 0, 0, 0, true, false);//in the burnt house
-		itemList.add(z);
-		z = new Items("Engine Part 2", 0, 0, 0, true, false);//in the cemetery
-		itemList.add(z);
-		z = new Items("Metal Plate 2", 0, 0, 0, true, false);//in hades bedroom
-		itemList.add(z);
-		z = new Items("Metal Plate 3", 0, 0, 0, true, false);//in the storage room
-		itemList.add(z);
-		z = new Items("Engine Part 3", 0, 0, 0, true, false);//in the underground hideout
-		itemList.add(z);
-		z = new Items("Metal Plate 4", 0, 0, 0, true, false);//at the water fall
-		itemList.add(z);
-		z = new Items("Engine Part 4", 0, 0, 0, true, false);//on the cliff leading to the beach
-		itemList.add(z);
+			if (item.name.equals("Metal Plate 1")  && !(item.inInventory)){
+				System.out.println("Missing Metal Plate 1!");
+				return;
+			}
+			if (item.name.equals("Engine Part 1")  && !(item.inInventory)){
+				System.out.println("Missing Engine Part 1!");
+				return;
+			}
+			if (item.name.equals("Pipes")  && !(item.inInventory)){
+				System.out.println("Missing Pipes!");
+				return;
+			}
+			if (item.name.equals("Engine Part 2")  && !(item.inInventory)){
+				System.out.println("Missing Engine Part 2!");
+				return;
+			}
+			if (item.name.equals("Engine Part 3")  && !(item.inInventory)){
+				System.out.println("Missing Engine Part 3!");
+				return;
+			}
+			if (item.name.equals("Engine Part 4")  && !(item.inInventory)){
+				System.out.println("Missing Engine Part 4!");
+				return;
+			}
+			if (item.name.equals("Metal Plate 2")  && !(item.inInventory)){
+				System.out.println("Missing Metal Plate 2!");
+				return;
+			}
+			if (item.name.equals("Metal Plate 3")  && !(item.inInventory)){
+				System.out.println("Missing Metal Plate 3!");
+				return;
+			}
+			if (item.name.equals("Metal Plate 4")  && !(item.inInventory)){
+				System.out.println("Missing Metal Plate 4!");
+				return;
+			}
 
-		Containers c = new Containers("Cabinet");
-		c.items.add("Long Sword");
-		c.items.add("Gas Lantern");
-		c.requiresKey = "Cabinet Key";
-		itemList.add(c);
-
-		c = new Containers("Chest");
-		c.items.add("Damascus Sword");
-		c.requiresKey = "Chest Key";
-		itemList.add(c);
+			}	
+			//print message:
+			//you fix the boat and sail off into the sunset. Game over.
+			//this may work or not ...	
+			currRoomID = 47;
+			updateCurrentRoom(currRoomID);
+			System.out.println("You are now at "+ currentRoom.getTitle() + currentRoom.getDesc());
+			listItemsinRoom();
 		
-		c = new Containers("Box");
-		c.items.add("Ruby");
-		c.requiresKey = "Picklock Set";
-		itemList.add(c);
-		
-		for (Items item : itemList){
-			System.out.println(item.name);
+		}
+
+
+		String capitalizeFirstLetter(String original){
+			if(original.length() == 0)
+				return original;
+			return original.substring(0, 1).toUpperCase() + original.substring(1);
+		}
+
+		String minusOneWord(String[] w) {
+			String s = " ";
+			for (int i=1; i<w.length; i++) {
+				s = s + w[i] + " ";
+			}
+			return s.trim();
+		}
+
+		String minusTwoWords(String[] w) {
+			String s = " ";
+			for (int i=2; i<w.length; i++) {
+				s = s + w[i] + " ";
+			}
+			return s.trim();
+		}
+
+		//Items(String name, int h, int am, int dm, boolean carry, boolean mine(is it in your inventory?)) {
+		void makeItems() {
+			//food
+			Items z = new Items("Sandwich", 15, 0,0,true, false);//in the beach		
+			itemList.add(z);
+			z = new Items("Banana", 5, 0,0,true, false);//in the beach
+			itemList.add(z);
+			//potions
+			z = new Items("Healing Potion", 50, 0, 0, true, false);//in the laberatory
+			itemList.add(z);
+			z = new Items("Damage/Rage Potion", 0, 80, 0, true, false);//in the laberatory
+			itemList.add(z);
+			// Weapons
+			z = new Items("Knife", 0, 10, 0, true, false);//in the beach
+			itemList.add(z);
+			z = new Items("Damascus Sword", 0, 60, 10, true, false);//in the chest
+			itemList.add(z);
+			z = new Items("Long Sword", 0, 50, 20, true, false);//in the cabinet
+			itemList.add(z);
+			z = new Items("Mace", 0, 30, 5, true, false);//in the attic
+			itemList.add(z);
+			// Armour
+			z = new Items("Iron Helmet", 0, 0, 40, true, false);//in the crypt
+			itemList.add(z);
+			z = new Items("Chest Plate", 0, 0, 40, true, false);//in the crypt
+			itemList.add(z);
+			z = new Items("Plate Leggings", 0, 0, 40, true, false);//in the crypt
+			itemList.add(z);
+			z = new Items("Shield", 0, 0, 100, true, false);//in the crypt
+			itemList.add(z);
+			//Keys
+			z = new Items("Cabinet Key", 0, 0, 0, true, false);//in the bedroom    
+			itemList.add(z);
+			z = new Items("Chest Key", 0, 0, 0, true, false);//at the beach
+			itemList.add(z);
+			//Misc
+			z = new Items("Scuba Mask", 0, 0, 0, true, false);//in the dead end
+			itemList.add(z);
+			z = new Items("Rope", 0, 0, 0, true, false);//at the cliff
+			itemList.add(z);
+			z = new Items("Hades Magazines", 0, 0, 0, true, false);//in the trap door
+			itemList.add(z);
+			z = new Items("Ruby", 0, 0, 0, true, false);// in the Box
+			itemList.add(z);
+			z = new Items("Picklock Set", 0, 0, 0, true, false);//in the bedroom
+			itemList.add(z);
+			z = new Items("Gas Lantern", 0, 0, 0, true, false);//in the cabinet
+			itemList.add(z);
+			z = new Items("Coins", 0, 0, 0, true, false);//in the village ruins
+			itemList.add(z);
+			z = new Items("Stupid Award", 0, 0, 0, true, false);//in the stupid hole
+			itemList.add(z);
+			z = new Items("Flashlight", 0, 0, 0, true, false);//in the cemetery
+			itemList.add(z);
+			//Boat Parts
+			z = new Items("Steering Wheel", 0, 0, 0, true, false);//in the bedroom
+			itemList.add(z);
+			z = new Items("Metal plate 1", 0, 0, 0, true, false);//in the attic
+			itemList.add(z);
+			z = new Items("Engine Part 1", 0, 0, 0, true, false);//in the top of the tower behind the troll (impliment combat later).
+			itemList.add(z);
+			z = new Items("Pipes", 0, 0, 0, true, false);//in the burnt house
+			itemList.add(z);
+			z = new Items("Engine Part 2", 0, 0, 0, true, false);//in the cemetery
+			itemList.add(z);
+			z = new Items("Metal Plate 2", 0, 0, 0, true, false);//in hades bedroom
+			itemList.add(z);
+			z = new Items("Metal Plate 3", 0, 0, 0, true, false);//in the storage room
+			itemList.add(z);
+			z = new Items("Engine Part 3", 0, 0, 0, true, false);//in the underground hideout
+			itemList.add(z);
+			z = new Items("Metal Plate 4", 0, 0, 0, true, false);//at the water fall
+			itemList.add(z);
+			z = new Items("Engine Part 4", 0, 0, 0, true, false);//on the cliff leading to the beach
+			itemList.add(z);
+
+			Containers c = new Containers("Cabinet");
+			c.items.add("Long Sword");
+			c.items.add("Gas Lantern");
+			c.requiresKey = "Cabinet Key";
+			itemList.add(c);
+
+			c = new Containers("Chest");
+			c.items.add("Damascus Sword");
+			c.requiresKey = "Chest Key";
+			itemList.add(c);
+
+			c = new Containers("Box");
+			c.items.add("Ruby");
+			c.requiresKey = "Picklock Set";
+			itemList.add(c);
+
+			//for (Items item : itemList){
+			//	System.out.println(item.name);
+			//}
+		}
+
+		//TODO see if this crashes with a one letter word.
+		private String capitalize(String line)
+		{
+			return Character.toUpperCase(line.charAt(0)) + line.toLowerCase().substring(1);
 		}
 	}
-
-	//TODO see if this crashes with a one letter word.
-	private String capitalize(String line)
-	{
-		return Character.toUpperCase(line.charAt(0)) + line.toLowerCase().substring(1);
-	}
-}
